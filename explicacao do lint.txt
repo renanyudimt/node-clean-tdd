@@ -1,0 +1,38 @@
+tsconfig vai ter todas as configuracoes do TS,
+
+ "compilerOptions": {
+        "outDir": "./dist", -> onde vai ficar o arquivo compilado
+        "module": "commonjs", -> modulo que o browser aceita, commonjs. Module alguns nao aceitam ainda 
+        "target": "es2019", -> nivel que o codigo vai ser transpilado
+        "esModuleInterop": true, -> vai mudar os imports para que o browser entenda
+        "allowJs": true, -> aceita o JS puro
+        "strictNullChecks": true -> preciou
+    }
+
+.eslintrc vai adicionar o standard with typescript que e uma regra que uma galeeera ai usa e vai adicionar as regras do lint
+{
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+      "project": "./tsconfig.json"
+  }
+}
+
+husky vai fazer algo antes de enviar o commit, ao escalar o projeto, ele ficara muito lento, entao so vai passar o lint antes de commitar, nos arquivos novos, o que passar ja ta passado
+{ 
+  "hooks": {
+    "pre-commit": "lint-staged" -> 
+  }
+}
+
+lintstage -> a gente consegue passar o lint somente nos arquivos que esta como staged pelo git
+
+{
+  "*.ts": ["eslint 'src/**' --fix", "git add"] -> eslint em tudo que tiver dentro de src, --fix pra tentar arrumar, se der, faz add
+}
+
+jest.config -> configuracoes do jest, 
+
+collectCoverageFrom: ['<rootDir>/src/**/*.ts'] -> qualquer aquivo dentro do root vai ter cobertura de test
+transform: {
+   '.+\\.ts$': 'test-jest' -> transforma tudo que tiver .ts em javascript pra rodar os testes
+}
