@@ -27,7 +27,7 @@ husky vai fazer algo antes de enviar o commit, ao escalar o projeto, ele ficara 
 lintstage -> a gente consegue passar o lint somente nos arquivos que esta como staged pelo git
 
 {
-  "*.ts": ["eslint 'src/**' --fix", "git add"] -> eslint em tudo que tiver dentro de src, --fix pra tentar arrumar, se der, faz add
+  "*.ts": ["eslint 'src/**' --fix", "npm run jest:staged" "git add"] -> eslint em tudo que tiver dentro de src, --fix pra tentar arrumar, se der, faz o script do jest e depois git add
 }
 
 jest.config -> configuracoes do jest, 
