@@ -4,9 +4,12 @@ import {
   InvalidParamError,
   ServerError
 } from './../errors'
-import { EmailValidator } from './../protocols'
+import {
+  EmailValidator,
+  AddAccountModel,
+  AddAccount
+} from './signup-protocols'
 import { AccountModel } from './../../domain/models'
-import { AddAccountModel, AddAccount } from './../../domain/usecases'
 
 interface SutType {
   sut: SignupController
@@ -200,5 +203,25 @@ describe('Signup Controller', () => {
       email: 'any_email@gmail.com',
       password: 'any_password'
     })
+  })
+
+  test('Should return 500 if AddAccount throws', () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockImplementation(() => {
+      throw new Error()
+    })
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@gmail.com',
+        password: 'any_password',
+        confirmPassword: 'any_password'
+      }
+    }
+
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 })
