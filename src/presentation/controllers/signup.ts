@@ -11,7 +11,8 @@ import {
 } from './../errors'
 import {
   badRequest,
-  serverError
+  serverError,
+  ok
 } from '../helpers'
 export class SignupController implements Controller {
   private readonly emailValidator: EmailValidator
@@ -48,10 +49,7 @@ export class SignupController implements Controller {
         password
       })
 
-      return {
-        statusCode: 200,
-        body: account
-      }
+      return ok(account)
     } catch (error) {
       return serverError()
     }
