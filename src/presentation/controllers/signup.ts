@@ -2,9 +2,9 @@ import {
   Controller,
   EmailValidator,
   HttpResponse,
-  HttpRequest,
-  AddAccount
-} from './signup-protocols'
+  HttpRequest
+} from './../protocols'
+import { AddAccount } from './../../domain/usecases/add-accounts'
 import {
   MissingParamError,
   InvalidParamError
@@ -51,6 +51,7 @@ export class SignupController implements Controller {
 
       return ok(account)
     } catch (error) {
+      console.log(error)
       return serverError()
     }
   }

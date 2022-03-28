@@ -8,5 +8,8 @@ export default {
   // a map for regular expressions to paths to transformers
   transform: {
     '.+\\.ts$': 'ts-jest'
-  }
+  },
+  coveragePathIgnorePatterns: [
+    'index.ts'
+  ]
 }

@@ -5,11 +5,13 @@ import {
   ServerError
 } from './../errors'
 import {
-  EmailValidator,
+  EmailValidator
+} from './../protocols'
+import {
   AddAccountModel,
   AddAccount
-} from './signup-protocols'
-import { AccountModel } from './../../domain/models'
+} from './../../domain/usecases/add-accounts'
+import { AccountModel } from './../../domain/models/account'
 
 interface SutType {
   sut: SignupController
