@@ -6,10 +6,12 @@ import {
 } from '../protocols'
 import {
   MissingParamError,
-  InvalidParamError,
-  ServerError
+  InvalidParamError
 } from './../errors'
-import { badRequest } from '../helpers'
+import {
+  badRequest,
+  serverError
+} from '../helpers'
 
 export class SignupController implements Controller {
   private readonly emailValidator: EmailValidator
@@ -34,10 +36,7 @@ export class SignupController implements Controller {
 
       return badRequest(new Error())
     } catch (error) {
-      return {
-        statusCode: 500,
-        body: new ServerError()
-      }
+      return serverError()
     }
   }
 }
